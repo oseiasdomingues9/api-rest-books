@@ -29,6 +29,7 @@ public class Book implements Serializable {
     @ManyToMany
     private List<Author> authors = new ArrayList<>();
 
+
     public Book(Long id, String title, String publisher, String photo) {
         this.id = id;
         this.title = title;

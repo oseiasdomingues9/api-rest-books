@@ -2,6 +2,7 @@ package com.devchallenge.apirestbooks.services;
 
 import com.devchallenge.apirestbooks.model.Book;
 import com.devchallenge.apirestbooks.repository.BookRepository;
+import com.devchallenge.apirestbooks.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,7 @@ public class BookServices {
     }
 
     public Book findById(Long id) {
-        return bookRepository.findById(id).orElseThrow(() -> new NullPointerException());
+        return bookRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     public Book insert(Book book) {
@@ -35,6 +36,7 @@ public class BookServices {
         oldBook.setTitle(newBook.getTitle());
         oldBook.setPublisher(newBook.getPublisher());
         oldBook.setPhoto(newBook.getPhoto());
+        oldBook.setAuthors(newBook.getAuthors());
     }
 
     public void delete(Long id){

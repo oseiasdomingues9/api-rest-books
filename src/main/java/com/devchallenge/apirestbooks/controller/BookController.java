@@ -31,6 +31,18 @@ public class BookController {
     @PostMapping
     public ResponseEntity<Book> findById(@RequestBody Book obj){
         Book book = bookServices.insert(obj);
-        return ResponseEntity.status(HttpStatus.OK).body(book);
+        return ResponseEntity.status(HttpStatus.CREATED).body(book);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Book> update(@PathVariable Long id,@RequestBody Book book){
+        Book entity = bookServices.update(id, book);
+        return ResponseEntity.status(HttpStatus.OK).body(entity);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        bookServices.delete(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }

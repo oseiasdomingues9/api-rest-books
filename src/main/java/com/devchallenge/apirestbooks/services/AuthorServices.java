@@ -2,6 +2,7 @@ package com.devchallenge.apirestbooks.services;
 
 import com.devchallenge.apirestbooks.model.Author;
 import com.devchallenge.apirestbooks.repository.AuthorRepository;
+import com.devchallenge.apirestbooks.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,7 @@ public class AuthorServices {
     }
 
     public Author findById(Long id) {
-        return authorRepository.findById(id).orElseThrow(() -> new NullPointerException());
+        return authorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     public Author insert(Author author) {
