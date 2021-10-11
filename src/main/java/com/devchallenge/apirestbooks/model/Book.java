@@ -1,6 +1,7 @@
 package com.devchallenge.apirestbooks.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 public class Book implements Serializable {
@@ -26,7 +26,13 @@ public class Book implements Serializable {
     private String publisher;
     private String photo;
 
-    @OneToMany
+    @ManyToMany
     private List<Author> authors = new ArrayList<>();
 
+    public Book(Long id, String title, String publisher, String photo) {
+        this.id = id;
+        this.title = title;
+        this.publisher = publisher;
+        this.photo = photo;
+    }
 }
